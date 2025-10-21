@@ -1,0 +1,254 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>I love you my dear baby boi</title>
+  <style>
+    :root {
+      --bg: #0c0f16;
+      --accent: #ffb6c1;
+      --accent2: #ffd6e0;
+      --text: #fff0f5;
+      --shadow: rgba(255, 192, 203, 0.3);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Courier New", monospace;
+      background: radial-gradient(ellipse at bottom, #1b0f1f 0%, var(--bg) 50%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    /* Floating hearts background */
+    .hearts {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hearts span {
+      position: absolute;
+      display: block;
+      color: #ffb6c1;
+      animation: float 10s linear infinite;
+      opacity: 0.7;
+      font-size: 1.4rem;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      50% { transform: translateY(50vh) rotate(180deg); }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .terminal {
+      position: relative;
+      z-index: 1;
+      width: 920px;
+      max-width: 95vw;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 182, 193, 0.2);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 0 40px var(--shadow);
+      text-align: center;
+    }
+
+    .topbar { display: flex; gap: 8px; margin-bottom: 16px; justify-content: center; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot.red { background: #ff6b81; }
+    .dot.yellow { background: #ffeaa7; }
+    .dot.green { background: #55efc4; }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--shadow);
+    }
+
+    p.lead {
+      margin: 0 0 20px 0;
+      color: rgba(255, 240, 245, 0.85);
+      font-size: 1rem;
+    }
+
+    .screen {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 1.25rem;
+      border-radius: 10px;
+      min-height: 220px;
+      font-size: 1rem;
+      line-height: 1.6;
+      border: 1px solid rgba(255, 182, 193, 0.1);
+      box-shadow: inset 0 0 20px rgba(255, 192, 203, 0.1);
+    }
+
+    .prompt-row { display: flex; gap: 12px; align-items: center; justify-content: center; }
+    .prompt { color: var(--accent); font-weight: 700; }
+
+    input[type="password"] {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.5rem 0.6rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      outline: none;
+      width: 300px;
+      text-align: center;
+      transition: 0.2s;
+    }
+    input[type="password"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px var(--shadow);
+    }
+
+    button.go {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(90deg, #ffb6c1, #ff9eb5);
+      color: #300a18;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button.go:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px var(--shadow);
+    }
+
+    .message {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: rgba(255, 240, 245, 0.7);
+    }
+
+    .next { display: none; }
+    .next.visible { display: block; animation: fadeIn 1.2s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .big-msg {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.8;
+      text-shadow: 0 0 8px rgba(255,182,193,0.2);
+    }
+
+    a.link {
+      display: inline-block;
+      margin-top: 15px;
+      color: #ffb6c1;
+      text-decoration: none;
+      border: 1px solid rgba(255, 182, 193, 0.4);
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.2s;
+    }
+    a.link:hover {
+      background: rgba(255, 182, 193, 0.2);
+    }
+
+    .footer {
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      color: rgba(255, 240, 245, 0.35);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <div class="hearts" id="hearts"></div>
+
+  <main class="terminal">
+    <div class="topbar">
+      <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+    </div>
+
+    <h1>💖 Welcome, My Precious 💖</h1>
+    <p class="lead">Enter the password to continue — <span style="color:var(--accent)">I can do this</span></p>
+
+    <div class="screen">
+      <div id="login-screen">
+        <div class="prompt-row">
+          <div class="prompt">Password:</div>
+          <input id="pwd" type="password" placeholder="Type password here" />
+          <button class="go" id="submitBtn">ENTER</button>
+        </div>
+        <div class="message" id="hint">Hint: It's three words — include the spaces 🌸</div>
+      </div>
+
+      <div id="next-screen" class="next">
+        <div class="big-msg">
+            My dearest baby boi,I am always here for you. I am sorry I shed some tears. I in no way want that to stop you from sharing anything with me. I shed because I really care for you. I will be stronger for you. I love you very much. If there is anything I can do, do not hesitate to ask me. I am always praying for you. I am here for you, in all your good and bad days. You are not putting any sort of burden on me,you are my most precious. You are my other half, my baby.
+          💗 <br><br>
+          <a href="cat.html" class="link">Click here, my love →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Coded with love 💕</div>
+  </main>
+
+  <script>
+    const PASSWORD = 'I can do this';
+    const input = document.getElementById('pwd');
+    const btn = document.getElementById('submitBtn');
+    const login = document.getElementById('login-screen');
+    const next = document.getElementById('next-screen');
+    const hint = document.getElementById('hint');
+    const hearts = document.getElementById('hearts');
+
+    function showNext() {
+      login.style.display = 'none';
+      next.classList.add('visible');
+    }
+
+    function fail() {
+      hint.textContent = 'Oops! Try again, my love 💕';
+    }
+
+    btn.addEventListener('click', () => {
+      const val = input.value.trim();
+      if (val === PASSWORD) showNext();
+      else fail();
+    });
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') btn.click();
+    });
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement('span');
+      heart.innerHTML = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 8 + Math.random() * 5 + 's';
+      hearts.appendChild(heart);
+      setTimeout(() => heart.remove(), 13000);
+    }
+    setInterval(createHeart, 800);
+  </script>
+</body>
+</html>
